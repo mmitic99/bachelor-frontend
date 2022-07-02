@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ProductsByCategoryComponent } from './products-by-category/products-by-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    ProductsByCategoryComponent
   ],
   imports: [
     BrowserModule,

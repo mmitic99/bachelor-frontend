@@ -1,0 +1,36 @@
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container ">
+            <div class="column is-10 is-offset-1">
+                <div class="columns">
+                    <div class="column is-3">
+
+                    </div>
+                    <div class="column has-text-centered">
+                        
+                        <mat-spinner *ngIf="showLoadingIcon && items.length==0" color="accent"></mat-spinner>
+
+                        <mat-grid-list cols="3" rowHeight="1:2" [gutterSize]="'15px'">
+                            <mat-grid-tile *ngFor="let item of items">
+                                <div class='rows'>
+                                    <div class='row p-5' style="height: 100%; width: fit-content; width: 100%; ">
+                                        <a mat-button [routerLink]="['/product', item.product.id]"><img src="{{'data:image/jpg;base64,' + item.image}}" alt="Image not available"/></a>
+                                    </div>
+                                    <div class='row has-text-centered' style="width: 100%; height: 100%;">
+                                        <a mat-button [routerLink]="['/product', item.product.id]">{{item.product.name}}</a>
+                                    </div>
+                                    <div class='row p-1 has-text-justified' style="height: 100%; width: fit-content;width: 100%; ">
+                                        <p class="cut-text2">{{item.description}}</p>
+                                    </div>
+                                    <div class='row  has-text-centered' style="width: 100%; height: 100%;">
+                                        <h1 class="has-text-danger">{{item.product.price}} RSD</h1>
+                                    </div>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -2,6 +2,7 @@
     <div class="hero-body">
         <div class="container ">
             <div class="column is-10 is-offset-1">
+                <mat-spinner *ngIf="showLoadingIcon && items.length==0" color="accent"></mat-spinner>
                 <ngb-carousel *ngIf="items">
                     <ng-template ngbSlide *ngFor="let item of items" >
                         <div class="wrapper">
