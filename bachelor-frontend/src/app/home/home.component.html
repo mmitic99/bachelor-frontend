@@ -1,0 +1,19 @@
+<section class="hero is-medium">
+    <div class="hero-body">
+        <div class="container ">
+            <div class="column is-10 is-offset-1">
+                <ngb-carousel *ngIf="items">
+                    <ng-template ngbSlide *ngFor="let item of items" >
+                        <div class="wrapper">
+                            <img src="{{'data:image/jpg;base64,' + item.image}}" alt="Image not available">
+                        </div>
+                        <div class="carousel-caption">
+                            <h3>{{item.product.name}}</h3>
+                            <p>{{item.product.price}} RSD</p>
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+            </div>
+        </div>
+    </div>
+</section>

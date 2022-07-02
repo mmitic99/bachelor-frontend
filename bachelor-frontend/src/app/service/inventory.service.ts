@@ -11,4 +11,8 @@ export class InventoryService {
     getCategories(){
         return this.http.get(environment.inventoryServiceUrl + 'category')
     }
+
+    getAllProducts(){
+        return this.http.get(environment.inventoryServiceUrl + 'product')
+    }
 }
