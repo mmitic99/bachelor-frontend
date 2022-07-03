@@ -11,13 +11,16 @@ import { HomeComponent } from './home/home.component';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ProductsByCategoryComponent } from './products-by-category/products-by-category.component';
+import { ProductComponent } from './product/product.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    ProductsByCategoryComponent
+    ProductsByCategoryComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import { ProductsByCategoryComponent } from './products-by-category/products-by-
     MaterialModule,
     HttpClientModule,
     NgbModule,
+    NgImageSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

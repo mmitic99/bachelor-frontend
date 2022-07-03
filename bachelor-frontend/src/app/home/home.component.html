@@ -3,11 +3,16 @@
         <div class="container ">
             <div class="column is-10 is-offset-1">
                 <mat-spinner *ngIf="showLoadingIcon && items.length==0" color="accent"></mat-spinner>
+                <p class="centered" *ngIf="!showLoadingIcon && (items.length==0 || items==null)" style="color: red;">
+                    Items not available</p>
                 <ngb-carousel *ngIf="items">
-                    <ng-template ngbSlide *ngFor="let item of items" >
-                        <div class="wrapper">
-                            <img src="{{'data:image/jpg;base64,' + item.image}}" alt="Image not available">
-                        </div>
+                    <ng-template ngbSlide *ngFor="let item of items">
+                        <a [routerLink]="['/product', item.product.id]">
+                            <div class="wrapper">
+                                <img src="{{'data:image/jpg;base64,' + item.image}}" alt="Image not available">
+
+                            </div>
+                        </a>
                         <div class="carousel-caption">
                             <h3>{{item.product.name}}</h3>
                             <p>{{item.product.price}} RSD</p>

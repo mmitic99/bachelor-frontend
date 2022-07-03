@@ -1,0 +1,66 @@
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container ">
+            <div class="column is-10 is-offset-1">
+                <mat-spinner *ngIf="showLoadingIcon && product==undefined" color="accent"></mat-spinner>
+
+                <h1 class="title">{{product.name}}</h1>
+
+                <br>
+                <div class="columns is-8 is-vcentered">
+                    <div class="column is-half">
+                        <ng-image-slider [images]="product.images"></ng-image-slider>
+                    </div>
+                    <div class="column box is-half has-background-white-ter">
+                        <h1 class="subtitle">{{product.name}}</h1>
+                        <br>
+                        <br>
+                        <div class="columns">
+                            <div class="column" style="text-align:left;">
+                                <h2>Cena:</h2>
+                            </div>
+                            <div class="column" style="text-align:right;">
+                                <h2>{{product.price}} RSD</h2>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column" style="text-align:left;">
+                                <p>Čekovima na 12 rata. Mesečno:</p>
+                            </div>
+                            <div class="column" style="text-align:right;">
+                                <p>{{product.price}} RSD/mesečno</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="text-align:right;">
+                            <p *ngIf="product.quantity>5">KOLIČINA NA STANJU: <b>VEĆA OD 5</b></p>
+                            <p *ngIf="product.quantity<=5 && product.quantity!=0">KOLIČINA NA STANJU: <b>MANJA OD 5</b></p>
+                            <p *ngIf="product.quantity==0">NIJE DOSTUPNO</p>
+                        </div>
+                        <br>
+                        <div style="text-align:right;">
+                            <button *ngIf="product.quantity!=0" mat-raised-button color="accent">
+                                <mat-label>Add to shopping cart </mat-label><br>
+                                <mat-icon aria-hidden="false" aria-label="add shopping cart">add_shopping_cart
+                                </mat-icon>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <br><br>
+                <div>
+                    <table class="table is-vcentered has-background-white-ter">
+                        <tr *ngFor="let feature of product.features">
+                            <th class="th">{{feature.key}}</th>
+                            <td>
+                                <div [innerHTML]="feature.values"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

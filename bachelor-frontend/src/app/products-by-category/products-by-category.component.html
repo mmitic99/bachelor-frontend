@@ -4,11 +4,13 @@
             <div class="column is-10 is-offset-1">
                 <div class="columns">
                     <div class="column is-3">
-
+                        <!-- TODO: ADD FILTER -->
                     </div>
                     <div class="column has-text-centered">
                         
                         <mat-spinner *ngIf="showLoadingIcon && items.length==0" color="accent"></mat-spinner>
+
+                        <p class="centered" *ngIf="!showLoadingIcon && (items.length==0 || items==null)" style="color: red;">Items not available</p>
 
                         <mat-grid-list cols="3" rowHeight="1:2" [gutterSize]="'15px'">
                             <mat-grid-tile *ngFor="let item of items">

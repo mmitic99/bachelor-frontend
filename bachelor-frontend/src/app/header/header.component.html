@@ -1,8 +1,9 @@
 <mat-toolbar>
-    <span style="margin-right:20px"><button mat-button routerLink="/">Shopping</button></span>
-    <button mat-raised-button color="accent" [matMenuTriggerFor]="menu">Categories</button>
+    <span style="margin-right:20px"><button mat-button routerLink="/">Prodavnica računara</button></span>
+    <button mat-raised-button color="accent" [matMenuTriggerFor]="menu">Kategorije</button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item *ngFor="let category of categories" [routerLink]="['/category', category]">{{category}}</button>
+        <p mat-menu-item *ngIf="categories==null||categories.length==0">Kategorije nisu dostupne</p>
     </mat-menu>
 
     <span class="example-spacer"></span>
