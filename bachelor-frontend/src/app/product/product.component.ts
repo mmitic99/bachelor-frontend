@@ -56,6 +56,8 @@ export class ProductComponent implements OnInit {
   }
 
   buy() {
+    sessionStorage.setItem('buyNowProductId', this.product.id)
+    this.router.navigate(['buyer-info'])
   }
 
 

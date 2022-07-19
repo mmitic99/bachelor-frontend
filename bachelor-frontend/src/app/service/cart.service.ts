@@ -7,33 +7,33 @@ let cart = []
 })
 export class CartService {
 
-    items: any
+    item: any
 
     constructor() { }
 
     addToCart(productId: string) {
         let local_storage
         let itemsInCart = []
-        this.items = {
+        this.item = {
             productId: productId,
             quantity: 1,
         }
         if (sessionStorage.getItem('cart') == null) {
             local_storage = []
-            itemsInCart.push(this.items)
+            itemsInCart.push(this.item)
             sessionStorage.setItem('cart', JSON.stringify(itemsInCart))
         }
         else {
             local_storage = JSON.parse(sessionStorage.getItem('cart')!)
             for (var i in local_storage) {
-                if (this.items.productId == local_storage[i].productId) {
+                if (this.item.productId == local_storage[i].productId) {
                     local_storage[i].quantity += 1
-                    this.items = null
+                    this.item = null
                     break
                 }
             }
-            if (this.items) {
-                itemsInCart.push(this.items)
+            if (this.item) {
+                itemsInCart.push(this.item)
             }
             local_storage.forEach(function (item: any) {
                 itemsInCart.push(item)
@@ -43,17 +43,15 @@ export class CartService {
         }
     }
     getItems() {
-        return this.items = JSON.parse(sessionStorage.getItem('cart')!)
-
-        //return this.items = 
+        return this.item = JSON.parse(sessionStorage.getItem('cart')!)
     }
-    deleteItem(item: any) {
-        item = item
+
+    deleteItem(productId: string) {
         let shopping_cart
         let index
         shopping_cart = JSON.parse(sessionStorage.getItem('cart')!)
         for (let i in shopping_cart) {
-            if (item.productId == shopping_cart[i].productId) {
+            if (productId == shopping_cart[i].productId) {
                 index = i
             }
         }
@@ -61,20 +59,31 @@ export class CartService {
         sessionStorage.setItem('cart', JSON.stringify(shopping_cart))
 
     }
-    addQty(item: any) {
-        item = item
+    addQty(productId: string) {
         let shopping_cart
         shopping_cart = JSON.parse(sessionStorage.getItem('cart')!)
         for (let i in shopping_cart) {
-            if (item.productId == shopping_cart[i].productId) {
+            if (productId == shopping_cart[i].productId) {
                 shopping_cart[i].quantity += 1
-                item = null
+                this.item = null
                 break
             }
         }
         sessionStorage.setItem('cart', JSON.stringify(shopping_cart))
 
     }
+    setQuantity(productId: string, quantity:number) {let shopping_cart
+        shopping_cart = JSON.parse(sessionStorage.getItem('cart')!)
+        for (let i in shopping_cart) {
+            if (productId == shopping_cart[i].productId) {
+                shopping_cart[i].quantity = quantity
+                this.item = null
+                break
+            }
+        }
+        sessionStorage.setItem('cart', JSON.stringify(shopping_cart))
+    }
+
     numberOfItems(): number {
         let itemsInCart = JSON.parse(sessionStorage.getItem('cart')!)
         if (itemsInCart != null) {
@@ -84,6 +93,6 @@ export class CartService {
         }
     }
     clearCart() {
-        sessionStorage.clear()
+        sessionStorage.removeItem('cart')
     }
 }

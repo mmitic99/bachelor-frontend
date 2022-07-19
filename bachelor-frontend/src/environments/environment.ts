@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  inventoryServiceUrl:"http://localhost:8081/"
+  inventoryServiceUrl:"http://localhost:8081/",
+  orderServiceUrl:"http://localhost:8082/"
 };
 
 /*

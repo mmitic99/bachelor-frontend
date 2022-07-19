@@ -13,6 +13,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ProductsByCategoryComponent } from './products-by-category/products-by-category.component';
 import { ProductComponent } from './product/product.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { BuyerInfoComponent } from './buyer-info/buyer-info.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { NgImageSliderModule } from 'ng-image-slider';
     HeaderComponent,
     HomeComponent,
     ProductsByCategoryComponent,
-    ProductComponent
+    ProductComponent,
+    BuyerInfoComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +35,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     HttpClientModule,
     NgbModule,
     NgImageSliderModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
