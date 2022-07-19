@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CartService } from '../service/cart.service';
 import { InventoryService } from '../service/inventory.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { InventoryService } from '../service/inventory.service';
 export class HeaderComponent implements OnInit {
   categories: any;
 
-  constructor(private inventoryService: InventoryService) { }
+  constructor(private inventoryService: InventoryService, public cartService:CartService) { }
 
   ngOnInit(): void {
     this.inventoryService.getCategories().subscribe(
@@ -21,5 +22,8 @@ export class HeaderComponent implements OnInit {
         this.categories = []
       }
     )
+  }
+  cartNumber():number{
+    return this.cartService.numberOfItems()
   }
 }

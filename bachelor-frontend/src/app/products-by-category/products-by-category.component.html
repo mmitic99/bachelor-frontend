@@ -15,7 +15,7 @@
                         <mat-grid-list cols="3" rowHeight="1:2" [gutterSize]="'15px'">
                             <mat-grid-tile *ngFor="let item of items">
                                 <div class='rows'>
-                                    <div class='row p-5' style="height: 100%; width: fit-content; width: 100%; ">
+                                    <div class='row p-5' style="height: 20vh; width: fit-content; width: 100%; ">
                                         <a mat-button [routerLink]="['/product', item.product.id]"><img src="{{'data:image/jpg;base64,' + item.image}}" alt="Image not available"/></a>
                                     </div>
                                     <div class='row has-text-centered' style="width: 100%; height: 100%;">

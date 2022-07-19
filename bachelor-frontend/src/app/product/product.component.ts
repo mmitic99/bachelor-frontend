@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../service/cart.service';
 import { InventoryService } from '../service/inventory.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class ProductComponent implements OnInit {
   product: any
   showLoadingIcon = true
 
-  constructor(private route: ActivatedRoute, private inventoryService: InventoryService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private inventoryService: InventoryService, private cartService:CartService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -44,7 +45,7 @@ export class ProductComponent implements OnInit {
       var values: any = Object.values(features)[i]
 
       var newValues = ""
-
+ 
       for (const element of values) {
         newValues += element + '<br>'
       }
@@ -54,6 +55,13 @@ export class ProductComponent implements OnInit {
 
   }
 
+  buy() {
+  }
+
+
+  addToCart(){
+    this.cartService.addToCart(this.product.id)
+  }
 
   private createImages(data: any) {
     var images = data.images;
