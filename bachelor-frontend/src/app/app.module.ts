@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { KeysComponent } from './keys/keys.component';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { ClipboardModule } from "@angular/cdk/clipboard";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
     NgImageSliderModule,
     FormsModule,
     ReactiveFormsModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthService } from '../service/auth.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,16 +16,16 @@ export class LoginComponent implements OnInit {
   usernameForm = new FormControl('', [Validators.required, Validators.maxLength(30)]);
   passwordForm = new FormControl('', [Validators.required]);
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.authService.getUserId() != '') {
+    if (this.userService.getUserId() != '') {
       this.router.navigate(['/'])
     }
   }
 
   login(): void {
-    this.authService.login(this.username, this.password).subscribe(
+    this.userService.login(this.username, this.password).subscribe(
       (data: any) => {
         localStorage.setItem('userId', data.id)
         console.log(data)

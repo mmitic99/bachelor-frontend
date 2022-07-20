@@ -1,1 +1,88 @@
-<p>keys works!</p>
+<section class="hero is-medium">
+    <div class="hero-body">
+        <div class="container ">
+            <div class="column is-10 is-offset-1">
+                <h1>Simetrični ključevi</h1><br>
+                <table class="table has-background-white-ter">
+                    <tr>
+                        <th class="th">Šifrovan ključ</th>
+                        <th class="th"></th>
+                        <th class="th">Dešifruj ključ</th>
+                    </tr>
+                    <tr *ngFor="let dataKey of user.dataKeys">
+                        <td style="vertical-align: middle; max-width: 20vw;">
+                            <div style="overflow-x: scroll; overflow-y: hidden; ">{{dataKey.ciphertext}}</div>
+                        </td>
+                        <td>
+                            <a mat-icon-button color="accent" (click)="copy(dataKey.ciphertext)">
+                                <mat-icon color="accent">file_copy</mat-icon>
+                            </a>
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <a mat-raised-button color="accent" (click)="decryptKey(dataKey.ciphertext)">
+                                Dešifruj
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;" class="has-text-centered" colspan="3">
+                            <a mat-raised-button color="accent" (click)="generateDataKey()">
+                                Generiši simetrični ključ
+                            </a>
+                        </td>
+                    </tr>
+                </table><br><br>
+
+                <h1>Asimetrični ključevi</h1><br>
+                <table class="table has-background-white-ter">
+                    <tr>
+                        <th class="th">Javni ključ</th>
+                        <th class="th"></th>
+                        <th class="th">Šifrovan privatni ključ</th>
+                        <th class="th"></th>
+                        <th class="th">Dešifruj privatni ključ</th>
+                    </tr>
+                    <tr *ngFor="let dataKey of user.dataKeyPairs">
+                        <td style="vertical-align: middle; max-width: 20vw;">
+                            <div style="overflow-x: scroll; overflow-y: hidden; ">{{dataKey.publicKey}}</div>
+                        </td>
+                        <td>
+                            <a mat-icon-button color="primary" (click)="copy(dataKey.publicKey)">
+                                <mat-icon color="primary">file_copy</mat-icon>
+                            </a>
+                        </td>
+                        <td style="vertical-align: middle; max-width: 20vw;">
+                            <div style="overflow-x: scroll; overflow-y: hidden; ">{{dataKey.privateCiphertext}}</div>
+                        </td>
+                        <td>
+                            <a mat-icon-button color="primary" (click)="copy(dataKey.privateCiphertext)">
+                                <mat-icon color="primary">file_copy</mat-icon>
+                            </a>
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <a mat-raised-button color="primary" (click)="decryptKey(dataKey.privateCiphertext)">
+                                Dešifruj
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;" class="has-text-centered" colspan="5">
+                            <a mat-raised-button color="primary" (click)="generateDataKeyPair()">
+                                Generiši asimetrični ključ
+                            </a>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</section>

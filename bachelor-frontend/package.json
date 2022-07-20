@@ -30,6 +30,7 @@
     "bulma": "^0.9.4",
     "ng-image-slider": "^3.0.1",
     "ngx-bootstrap": "^8.0.0",
+    "ngx-clipboard": "^15.1.0",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.4.23",
     "tslib": "^2.3.0",

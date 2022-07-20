@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { UserService } from '../service/user.service';
 import { CartService } from '../service/cart.service';
 import { InventoryService } from '../service/inventory.service';
 
@@ -11,7 +11,7 @@ import { InventoryService } from '../service/inventory.service';
 export class HeaderComponent implements OnInit {
   categories: any;
 
-  constructor(private inventoryService: InventoryService, public cartService:CartService, public authService:AuthService) { }
+  constructor(private inventoryService: InventoryService, public cartService:CartService, public userService:UserService) { }
 
   ngOnInit(): void {
     this.inventoryService.getCategories().subscribe(

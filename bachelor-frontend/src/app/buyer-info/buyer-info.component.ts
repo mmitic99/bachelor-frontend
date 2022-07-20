@@ -124,7 +124,6 @@ export class BuyerInfoComponent implements OnInit {
           {
             icon: 'success',
             title: 'Uspešno poslata porudžbina',
-            //text: 'Here can login',
             timer: 3000,
             showConfirmButton: false,
           })

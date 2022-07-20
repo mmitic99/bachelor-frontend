@@ -9,17 +9,23 @@
             </mat-menu>
 
             <span class="example-spacer"></span>
+            <button *ngIf="userService.getUserId() != ''" mat-raised-button class="example-icon" [routerLink]="['keys']" color="accent">
+                Keys
+            </button>
+            <button *ngIf="userService.getUserId() != ''"  mat-raised-button class="example-icon mx-5" [routerLink]="['create-product']" color="accent">
+                Create product
+            </button>
 
             <button mat-icon-button class="example-icon  mr-5" aria-label="Example icon-button with share icon"
                 [matBadge]="cartNumber()" matBadgeColor="accent" [routerLink]="['shopping-cart']">
                 <mat-icon>shopping_cart</mat-icon>
             </button>
-            <button *ngIf="authService.getUserId() == ''" mat-raised-button class="example-icon" [routerLink]="['login']" color="primary">
+            <button *ngIf="userService.getUserId() == ''" mat-raised-button class="example-icon" [routerLink]="['login']" color="primary">
                 Login
             </button>
             
 
-            <button *ngIf="authService.getUserId() != ''" mat-raised-button class="example-icon" (click)="authService.logout()">
+            <button *ngIf="userService.getUserId() != ''" mat-raised-button class="example-icon" (click)="userService.logout()">
                 Logout
             </button>
 
