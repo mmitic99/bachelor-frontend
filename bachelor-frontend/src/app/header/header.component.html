@@ -1,16 +1,27 @@
-<mat-toolbar>
-    <span style="margin-right:20px"><button mat-button routerLink="/">Prodavnica računara</button></span>
-    <button mat-raised-button color="accent" [matMenuTriggerFor]="menu">Kategorije</button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item *ngFor="let category of categories" [routerLink]="['/category', category]">{{category}}</button>
-        <p mat-menu-item *ngIf="categories==null||categories.length==0">Kategorije nisu dostupne</p>
-    </mat-menu>
+<p>
+    <mat-toolbar>
+            <span style="margin-right:20px"><button mat-button routerLink="/">Prodavnica računara</button></span>
+            <button mat-raised-button color="accent" [matMenuTriggerFor]="menu">Kategorije</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let category of categories"
+                    [routerLink]="['/category', category]">{{category}}</button>
+                <p mat-menu-item *ngIf="categories==null||categories.length==0">Kategorije nisu dostupne</p>
+            </mat-menu>
 
-    <span class="example-spacer"></span>
-    
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" [matBadge]="cartNumber()" matBadgeColor="accent" [routerLink]="['shopping-cart']">
-        <mat-icon>shopping_cart</mat-icon>
-    </button>
+            <span class="example-spacer"></span>
 
+            <button mat-icon-button class="example-icon  mr-5" aria-label="Example icon-button with share icon"
+                [matBadge]="cartNumber()" matBadgeColor="accent" [routerLink]="['shopping-cart']">
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+            <button *ngIf="authService.getUserId() == ''" mat-raised-button class="example-icon" [routerLink]="['login']" color="primary">
+                Login
+            </button>
+            
 
-</mat-toolbar>
+            <button *ngIf="authService.getUserId() != ''" mat-raised-button class="example-icon" (click)="authService.logout()">
+                Logout
+            </button>
+
+    </mat-toolbar>
+</p>

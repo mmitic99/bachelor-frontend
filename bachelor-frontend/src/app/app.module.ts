@@ -16,6 +16,9 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { BuyerInfoComponent } from './buyer-info/buyer-info.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { KeysComponent } from './keys/keys.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductsByCategoryComponent,
     ProductComponent,
     BuyerInfoComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    LoginComponent,
+    KeysComponent,
+    CreateProductComponent
   ],
   imports: [
     BrowserModule,
