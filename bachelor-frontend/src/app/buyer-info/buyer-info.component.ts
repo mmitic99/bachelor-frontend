@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { CartService } from '../service/cart.service';
 import { InventoryService } from '../service/inventory.service';
 import { OrderService } from '../service/order.service';
@@ -119,12 +120,26 @@ export class BuyerInfoComponent implements OnInit {
 
     this.orderService.order(this.buyer).subscribe(
       (data)=>{
+        Swal.fire(
+          {
+            icon: 'success',
+            title: 'Uspešno poslata porudžbina',
+            //text: 'Here can login',
+            timer: 3000,
+            showConfirmButton: false,
+          })
         this.showLoadingIcon = false;
         this.cartService.clearCart()
         this.router.navigate([''])
       },
       (error)=>{
-        console.log(error)
+        Swal.fire(
+          {
+            icon: 'error',
+            title: error.message,
+            timer: 3000,
+            showConfirmButton: false,
+          })
       }
     )
   }

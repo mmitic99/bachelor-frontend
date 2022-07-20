@@ -5,17 +5,17 @@
                 <mat-spinner *ngIf="showLoadingIcon && items.length==0" color="accent"></mat-spinner>
                 <p class="centered" *ngIf="!showLoadingIcon && (items.length==0 || items==null)" style="color: red;">
                     Proizvodi nisu dostupni</p>
-                <ngb-carousel *ngIf="items">
+                <ngb-carousel *ngIf="items" class="has-background-dark" style="border-radius: 15px; ">
                     <ng-template ngbSlide *ngFor="let item of items">
                         <a [routerLink]="['/product', item.product.id]">
                             <div class="wrapper">
-                                <img src="{{'data:image/jpg;base64,' + item.image}}" alt="Image not available">
+                                <img src="{{'data:image/jpg;base64,' + item.image}}" alt="Slika nije dostupna">
 
                             </div>
                         </a>
                         <div class="carousel-caption">
                             <h3>{{item.product.name}}</h3>
-                            <p>{{item.product.price}} RSD</p>
+                            <p>{{item.product.price|number:'0.2-2'}} RSD</p>
                         </div>
                     </ng-template>
                 </ngb-carousel>

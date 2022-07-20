@@ -2,41 +2,54 @@
     <div class="hero-body">
         <div class="container ">
             <div class="column is-10 is-offset-1">
-
-                <table class="table is-vcentered has-background-white-ter">
-                    <tr>
-                        <th class="th"></th>
-                        <th class="th">Slika</th>
-                        <th class="th">Naziv proizvoda</th>
-                        <th class="th">Količina</th>
-                        <th class="th">Jedinična cena</th>
-                        <th class="th">Ukupna cena</th>
-                    </tr>
-                    <tr *ngFor="let product of products">
-                        <td>{{product.index + 1}}</td>
-                        <td><a [routerLink]="['../product', product.id]">
-                            <div style="width: 10vh; height: 10vh;"><img
-                                    src="{{'data:image/jpg;base64,' + product.image}}" alt="Slika nije dostupna"></div></a>
-                        </td>
-                        <td>{{product.name}}</td>
-                        <td><input matInput type="number" [(ngModel)]="product.itemQuantity" min="1" (change)="changeQuantity(product)"></td>
-                        <td>{{product.price | number:'0.2-2'}} RSD</td>
-                        <td>{{product.itemQuantity * product.price | number:'0.2-2'}} RSD</td>
-                    </tr>
-                    <tr><br></tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <th>Ukupno</th>
-                        <td>{{price() | number:'0.2-2'}} RSD</td>
-                    </tr>
-                </table>
-                <div style="text-align: right;">
-                    <button mat-raised-button color="primary" [routerLink]="['../buyer-info']">
-                        Poruči
-                    </button>
+                <div *ngIf="products != null && products.length != 0">
+                    <table class="table has-background-white-ter">
+                        <tr>
+                            <th class="th"></th>
+                            <th class="th">Slika</th>
+                            <th class="th">Naziv proizvoda</th>
+                            <th class="th">Količina</th>
+                            <th class="th">Jedinična cena</th>
+                            <th class="th">Ukupna cena</th>
+                            <th class="th"></th>
+                        </tr>
+                        <tr *ngFor="let product of products">
+                            <td style="vertical-align: middle;">{{product.index + 1}}</td>
+                            <td style="vertical-align: middle;"><a [routerLink]="['../product', product.id]">
+                                    <div style="width: 10vh; height: 10vh;"><img
+                                            src="{{'data:image/jpg;base64,' + product.image}}"
+                                            alt="Slika nije dostupna"></div>
+                                </a>
+                            </td>
+                            <td style="vertical-align: middle;">{{product.name}}</td>
+                            <td style="vertical-align: middle;"><input matInput type="number"
+                                    [(ngModel)]="product.itemQuantity" min="1" (change)="changeQuantity(product)"
+                                    style="width:5vw;"></td>
+                            <td style="vertical-align: middle;">{{product.price | number:'0.2-2'}} RSD</td>
+                            <td style="vertical-align: middle;">{{product.itemQuantity * product.price |
+                                number:'0.2-2'}} RSD</td>
+                            <td style="vertical-align: middle;"><a (click)="deleteProductFromCart(product)">
+                                    <mat-icon color="warn">clear</mat-icon>
+                                </a></td>
+                        </tr>
+                        <tr><br></tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <th>Ukupno</th>
+                            <td>{{price() | number:'0.2-2'}} RSD</td>
+                        </tr>
+                    </table>
+                    <div style="text-align: right;">
+                        <button mat-raised-button color="primary" [routerLink]="['../buyer-info']">
+                            Poruči
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="products == null || products.length == 0" class="has-text-centered">
+                    <h1 style="color: red;">Korpa je prazna</h1>
                 </div>
             </div>
         </div>

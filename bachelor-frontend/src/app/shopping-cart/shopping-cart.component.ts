@@ -16,15 +16,17 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
 
-      this.shoppingCartItems = this.cartService.getItems();
-      if (this.shoppingCartItems == null || this.shoppingCartItems.length == 0) {
-        this.router.navigate([''])
-      }
+    this.products = []
+    this.shoppingCartItems = this.cartService.getItems();
+    /*if (this.shoppingCartItems == null || this.shoppingCartItems.length == 0) {
+      this.router.navigate([''])
+    }*/
+    if (this.shoppingCartItems != null)
       this.getProducts();
 
   }
 
-  changeQuantity(product:any){
+  changeQuantity(product: any) {
     this.cartService.setQuantity(product.id, product.itemQuantity)
   }
 
@@ -64,12 +66,21 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  price(){
+  price() {
     var retVal = 0;
     for (const product of this.products) {
       retVal += product.itemQuantity * product.price
     }
     return retVal;
+  }
+
+  deleteProductFromCart(product: any) {
+    this.cartService.deleteItem(product.id)
+    //this.ngOnInit()
+    if (this.products != null)
+      this.products = this.products.filter((p: any) => p.id != product.id)
+    if (this.shoppingCartItems != null)
+      this.shoppingCartItems = this.shoppingCartItems.filter((p: any) => p.productId != product.id)
   }
 
 }
