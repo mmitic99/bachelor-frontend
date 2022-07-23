@@ -12,6 +12,10 @@ export class InventoryService {
         return this.http.get(environment.inventoryServiceUrl + 'category')
     }
 
+    getFeatureNames() {
+        return this.http.get(environment.inventoryServiceUrl + 'feature-name')
+    }
+
     getAllProducts(){
         return this.http.get(environment.inventoryServiceUrl + 'product')
     }
@@ -22,5 +26,9 @@ export class InventoryService {
 
     getProductById(productId: any) {
         return this.http.get(environment.inventoryServiceUrl + 'product/' + productId)
+    }
+
+    createProduct(product: any) {
+        return this.http.post(environment.inventoryServiceUrl + 'product', product)
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { UserService } from '../service/user.service';
 import { ClipboardService } from 'ngx-clipboard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-keys',
@@ -11,9 +12,12 @@ import { ClipboardService } from 'ngx-clipboard';
 export class KeysComponent implements OnInit {
   user: any
 
-  constructor(private userService: UserService, private clipboardApi: ClipboardService) { }
+  constructor(private userService: UserService, private clipboardApi: ClipboardService, private router:Router) { }
 
   ngOnInit(): void {
+    if (this.userService.getUserId() == '') {
+      this.router.navigate([''])
+    }
     this.userService.getUser().subscribe(
       (data) => {
         this.user = data;
@@ -24,9 +28,9 @@ export class KeysComponent implements OnInit {
     )
   }
 
-  decryptKey(ciphertext: string){
+  decryptKey(ciphertext: string) {
     this.userService.decryptKey(ciphertext).subscribe(
-      (data)=>{
+      (data) => {
         this.clipboardApi.copyFromContent(data)
         Swal.fire(
           {
@@ -34,24 +38,28 @@ export class KeysComponent implements OnInit {
             text: 'Dešifrovan ključ, nestaće za 10 sekunde, kopiran je u memoriji',
             timer: 10000,
             showConfirmButton: false,
+            showCancelButton: true,
+            cancelButtonText: 'Otkaži'
           })
       },
-      (error)=>{
+      (error) => {
         Swal.fire(
           {
             icon: 'error',
             title: error.message,
             timer: 3000,
             showConfirmButton: false,
+            showCancelButton: true,
+            cancelButtonText: 'Otkaži'
           })
       }
     )
   }
 
-  generateDataKey(){
+  generateDataKey() {
     this.userService.getNewKey().subscribe(
-      (data:any)=>{
-        this.user.dataKeys.push({ciphertext:data.ciphertext})
+      (data: any) => {
+        this.user.dataKeys.push({ ciphertext: data.ciphertext })
         this.clipboardApi.copyFromContent(data.plaintext)
         Swal.fire(
           {
@@ -59,18 +67,20 @@ export class KeysComponent implements OnInit {
             text: 'Dešifrovan ključ, nestaće za 10 sekunde, kopiran je u memoriji',
             timer: 10000,
             showConfirmButton: false,
+            showCancelButton: true,
+            cancelButtonText: 'Otkaži'
           })
       },
-      (error)=>{
+      (error) => {
 
       }
     )
   }
 
-  generateDataKeyPair(){
+  generateDataKeyPair() {
     this.userService.getNewKeyPair().subscribe(
-      (data:any)=>{
-        this.user.dataKeyPairs.push({publicKey:data.publicKey, privateCiphertext:data.privateCiphertext})
+      (data: any) => {
+        this.user.dataKeyPairs.push({ publicKey: data.publicKey, privateCiphertext: data.privateCiphertext })
         this.clipboardApi.copyFromContent(data.privatePlaintext)
         Swal.fire(
           {
@@ -78,15 +88,17 @@ export class KeysComponent implements OnInit {
             text: 'Dešifrovan ključ, nestaće za 10 sekunde, kopiran je u memoriji',
             timer: 10000,
             showConfirmButton: false,
+            showCancelButton: true,
+            cancelButtonText: 'Otkaži'
           })
       },
-      (error)=>{
+      (error) => {
 
       }
     )
   }
 
-  copy(text:any) {
+  copy(text: any) {
     this.clipboardApi.copyFromContent(text)
     Swal.fire(
       {

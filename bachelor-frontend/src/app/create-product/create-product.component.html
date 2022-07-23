@@ -1,1 +1,116 @@
-<p>create-product works!</p>
+<section class="hero is-medium">
+    <div class="hero-body">
+        <div class="container ">
+            <div class="column is-10 is-offset-1">
+
+                <mat-card class="example-card">
+                    <div style="margin-left: 15%; margin-right: 15%;">
+                        <br>
+                        <mat-card-content style="margin-left: 1%; margin-right: 1%;">
+                            <br>
+                            <mat-form-field appearance="legacy" style="width: 100%;">
+                                <mat-label>Naziv</mat-label>
+                                <input type="text" matInput placeholder="naziv" [(ngModel)]="product.name"
+                                    [formControl]="nameForm" required>
+
+                                <mat-error *ngIf="nameForm.invalid">{{getnameErrorMessage()}}</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="legacy" style="width: 100%;">
+                                <mat-label>Cena</mat-label>
+                                <input type="number" matInput placeholder="cena" [(ngModel)]="product.price"
+                                    [formControl]="priceForm" required>
+
+                                <mat-error *ngIf="priceForm.invalid">{{getpriceErrorMessage()}}</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="legacy" style="width: 100%;">
+                                <mat-label>Kategorija</mat-label>
+                                <input type="text" matInput placeholder="kategorija" [(ngModel)]="product.category"
+                                    [formControl]="categoryForm" [matAutocomplete]="auto" required>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let category of categories" [value]="category">
+                                        {{category}}
+                                    </mat-option>
+                                </mat-autocomplete>
+
+                                <mat-error *ngIf="categoryForm.invalid">{{getcategoryErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                            <br />
+
+                            <form [formGroup]="productForm">
+
+                                <mat-list formArrayName="features">
+                                    <mat-list-item>
+                                        <div class="has-text-right">
+                                            <h1>Opis</h1>
+                                        </div>
+                                        <span class="example-spacer"></span>
+                                        <div class=" has-text-right">
+                                            <button mat-raised-button color="accent"
+                                                (click)="addFeature()">Dodaj</button>
+                                        </div>
+                                    </mat-list-item>
+                                    <mat-list-item *ngFor="let quantity of features().controls; let i=index"
+                                        [formGroupName]="i" style="height: fit-content;">
+
+                                        <div class="columns" style="width: 100%;">
+                                            <div class="column">
+                                                <mat-form-field appearance="legacy" style="width: 100%;">
+                                                    <mat-label>Naziv karakteristike</mat-label>
+                                                    <input type="text" matInput placeholder="Naziv karakteristike"
+                                                        formControlName="featureName" [matAutocomplete]="auto">
+                                                    <mat-autocomplete #auto="matAutocomplete">
+                                                        <mat-option *ngFor="let featureName of featureNames"
+                                                            [value]="featureName">
+                                                            {{featureName}}
+                                                        </mat-option>
+                                                    </mat-autocomplete>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="column">
+                                                <mat-form-field class="example-chip-list" appearance="legacy">
+                                                    <mat-label>karakteristike</mat-label>
+                                                    <mat-chip-list #chipList aria-label="Fruit selection">
+                                                        <mat-chip *ngFor="let fruit of getFeature(i)"
+                                                            (removed)="remove(fruit, i)">
+                                                            {{fruit.name}}
+                                                            <button matChipRemove>
+                                                                <mat-icon>cancel</mat-icon>
+                                                            </button>
+                                                        </mat-chip>
+                                                        <input matInput placeholder="karakteristike..."
+                                                            [matChipInputFor]="chipList"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="add($event, i)">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="column is-one-quarter">
+                                                <button (click)="removeFeature(i)" mat-raised-button
+                                                    color="warn">Obriši</button>
+                                            </div>
+                                        </div>
+
+                                    </mat-list-item>
+                                </mat-list>
+
+                            </form>
+
+                            <br />
+
+                            <div style="text-align: center;">
+                                <button mat-raised-button color="primary" (click)="create()"
+                                    [disabled]="nameForm.invalid || priceForm.invalid || categoryForm.invalid">
+                                    Kreiraj Proizvod
+                                </button>
+                            </div>
+                        </mat-card-content>
+                        <br>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</section>

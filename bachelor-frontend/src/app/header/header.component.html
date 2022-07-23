@@ -10,10 +10,10 @@
 
             <span class="example-spacer"></span>
             <button *ngIf="userService.getUserId() != ''" mat-raised-button class="example-icon" [routerLink]="['keys']" color="accent">
-                Keys
+                Upravljaj ključevima
             </button>
             <button *ngIf="userService.getUserId() != ''"  mat-raised-button class="example-icon mx-5" [routerLink]="['create-product']" color="accent">
-                Create product
+                Kreiraj proizvod
             </button>
 
             <button mat-icon-button class="example-icon  mr-5" aria-label="Example icon-button with share icon"
@@ -21,12 +21,12 @@
                 <mat-icon>shopping_cart</mat-icon>
             </button>
             <button *ngIf="userService.getUserId() == ''" mat-raised-button class="example-icon" [routerLink]="['login']" color="primary">
-                Login
+                Uloguj se
             </button>
             
 
             <button *ngIf="userService.getUserId() != ''" mat-raised-button class="example-icon" (click)="userService.logout()">
-                Logout
+                Izloguj se
             </button>
 
     </mat-toolbar>
