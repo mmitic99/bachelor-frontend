@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../service/cart.service';
 import { InventoryService } from '../service/inventory.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,7 @@ export class ProductComponent implements OnInit {
   product: any
   showLoadingIcon = true
 
-  constructor(private route: ActivatedRoute, private router: Router, private inventoryService: InventoryService, private cartService:CartService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private inventoryService: InventoryService, private cartService:CartService, public userService:UserService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(

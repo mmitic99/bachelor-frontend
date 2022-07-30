@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class InventoryService {
     constructor(private http: HttpClient) { }
 
-    getCategories(){
+    getCategories() {
         return this.http.get(environment.inventoryServiceUrl + 'category')
     }
 
@@ -16,11 +16,11 @@ export class InventoryService {
         return this.http.get(environment.inventoryServiceUrl + 'feature-name')
     }
 
-    getAllProducts(){
+    getAllProducts() {
         return this.http.get(environment.inventoryServiceUrl + 'product')
     }
 
-    getProductsByCategory(categoryName:any){
+    getProductsByCategory(categoryName: any) {
         return this.http.get(environment.inventoryServiceUrl + 'product/category/' + categoryName)
     }
 
@@ -30,5 +30,22 @@ export class InventoryService {
 
     createProduct(product: any) {
         return this.http.post(environment.inventoryServiceUrl + 'product', product)
+    }
+    editProduct(product: any) {
+        return this.http.put(environment.inventoryServiceUrl + 'product', product)
+    }
+    removeImage(id: any, productId: any) {
+        return this.http.post(environment.inventoryServiceUrl + 'product/' + productId + '/image/' + id, null)
+    }
+    uploadImage(file: File, id: any) {
+        let photo = new FormData();
+        photo.append('image', file);
+
+
+        return this.http.post<any>(environment.inventoryServiceUrl + 'product/image/' + id, photo);
+    }
+
+    updateQuantity(id: any, quantity: any) {
+        return this.http.put<any>(environment.inventoryServiceUrl + 'product/quantity', {id:id, quantity:quantity});
     }
 }

@@ -7,6 +7,8 @@
                     [routerLink]="['/category', category]">{{category}}</button>
                 <p mat-menu-item *ngIf="categories==null||categories.length==0">Kategorije nisu dostupne</p>
             </mat-menu>
+            <button  mat-raised-button color="accent" class="example-icon mx-5" *ngIf="userService.getUserId() != ''" 
+                [routerLink]="['/category', 'all']">Svi proizvodi</button>
 
             <span class="example-spacer"></span>
             <button *ngIf="userService.getUserId() != ''" mat-raised-button class="example-icon" [routerLink]="['keys']" color="accent">

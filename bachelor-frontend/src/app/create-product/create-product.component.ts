@@ -20,8 +20,6 @@ export class CreateProductComponent implements OnInit {
   categories: any;
   featureNames: any;
 
-  name = 'Angular';
-
   productForm: FormGroup;
 
   product = new Product("", 0, "", [])
@@ -86,6 +84,14 @@ export class CreateProductComponent implements OnInit {
     this.inventoryService.createProduct(product).subscribe(
       (data: any) => {
         this.router.navigate(['product', data.id])
+        
+        Swal.fire(
+          {
+            icon: 'success',
+            title: 'Uspešno ste kreirali proizvod',
+            timer: 3000,
+            showConfirmButton: false,
+          })
       },
       (error) => {
         Swal.fire(
@@ -146,17 +152,14 @@ export class CreateProductComponent implements OnInit {
 
   add(event: MatChipInputEvent, index: number): void {
     const value = (event.value || '').trim();
-    // Add our fruit
     if (value) {
       this.features().at(index).get('features')!.value.push({ name: value });
     }
-
-    // Clear the input value
     event.chipInput!.clear();
   }
 
-  remove(fruit: Feature, index: number): void {
-    const i = this.features().at(index).get('features')!.value.indexOf(fruit);
+  remove(feature: Feature, index: number): void {
+    const i = this.features().at(index).get('features')!.value.indexOf(feature);
 
     if (index >= 0) {
       this.features().at(index).get('features')!.value.splice(i, 1);

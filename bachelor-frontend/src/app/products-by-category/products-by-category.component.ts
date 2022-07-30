@@ -16,24 +16,44 @@ export class ProductsByCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
-      (data)=>{
+      (data) => {
         this.showLoadingIcon = true
         this.items = []
         this.categoryName = data.get("name")
-        this.getProducts();
+        if (this.categoryName == 'all') {
+          this.getAllProducts()
+        }
+        else {
+          this.getProducts();
+        }
+      }
+    )
+  }
+  getAllProducts() {
+    this.inventoryService.getAllProducts().subscribe(
+      (data: any) => {
+        this.items = []
+        data.forEach((product: { images: any, quantity: any }) => {
+          this.items.push({ image: product.images[Object.keys(product.images)[0]], product: product, description: this.getProductDescription(product) })
+        });
+        this.showLoadingIcon = false
+      },
+      (error) => {
+        this.items = []
+        this.showLoadingIcon = false
       }
     )
   }
   getProducts() {
     this.inventoryService.getProductsByCategory(this.categoryName).subscribe(
-      (data:any)=>{
+      (data: any) => {
         this.items = []
         data.forEach((product: { images: any, quantity: any }) => {
-            this.items.push({ image: product.images[Object.keys(product.images)[0]], product: product , description: this.getProductDescription(product)})
+          this.items.push({ image: product.images[Object.keys(product.images)[0]], product: product, description: this.getProductDescription(product) })
         });
         this.showLoadingIcon = false
       },
-      (error)=>{
+      (error) => {
         this.items = []
         this.showLoadingIcon = false
       }
@@ -45,7 +65,7 @@ export class ProductsByCategoryComponent implements OnInit {
     for (const i in Object.keys(product.features)) {
       retVal += Object.keys(product.features)[i] + ": " + product.features[Object.keys(product.features)[i]] + ";  "
     }
-    
+
 
     return retVal;
   }

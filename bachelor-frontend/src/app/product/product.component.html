@@ -8,6 +8,9 @@
                 <mat-spinner *ngIf="showLoadingIcon && product==undefined" color="accent"></mat-spinner>
             </div>
             <div class="column is-10 is-offset-1" *ngIf="product != undefined">
+
+                <button mat-raised-button color="accent" *ngIf="userService.getUserId() != ''"
+                    [routerLink]="['/edit-product', productId]">Izmeni</button>
                 <h1 class="title">{{product.name}}</h1>
 
                 <br>
@@ -44,12 +47,13 @@
                         </div>
                         <br>
                         <div style="text-align:right;">
-                            <button class="mr-2" *ngIf="product.quantity!=0" mat-raised-button color="warn" (click)="buy()">
+                            <button class="mr-2" *ngIf="product.quantity!=0" mat-raised-button color="warn"
+                                (click)="buy()">
                                 <mat-label>Kupi odmah</mat-label><br>
                                 <mat-icon aria-hidden="false" aria-label="local shipping icon">local_shipping
                                 </mat-icon>
                             </button>
-                            <button *ngIf="product.quantity!=0" mat-raised-button color="accent"  (click)="addToCart()">
+                            <button *ngIf="product.quantity!=0" mat-raised-button color="accent" (click)="addToCart()">
                                 <mat-label>Dodaj u korpu</mat-label><br>
                                 <mat-icon aria-hidden="false" aria-label="add shopping cart">add_shopping_cart
                                 </mat-icon>

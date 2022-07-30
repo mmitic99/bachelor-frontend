@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { KeysComponent } from './keys/keys.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ClipboardModule } from "@angular/cdk/clipboard";
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ClipboardModule } from "@angular/cdk/clipboard";
     ShoppingCartComponent,
     LoginComponent,
     KeysComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
