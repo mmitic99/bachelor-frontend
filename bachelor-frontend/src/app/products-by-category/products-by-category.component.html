@@ -70,6 +70,8 @@
                         </div>
                     </div>
                     <div class="column has-text-centered">
+                        
+                        <h1 *ngIf="showSearch">Rezultat pretrage za "{{searchParam}}"</h1>
 
                         <mat-spinner *ngIf="showLoadingIcon && items.length==0" color="accent"></mat-spinner>
                         <p class="centered" *ngIf="!showLoadingIcon && (items.length==0 || items==null)"

@@ -52,4 +52,8 @@ export class InventoryService {
     filter(parameters: string) {
         return this.http.get(environment.inventoryServiceUrl + 'product/filter?' + parameters)
     }
+
+    search(searchParam: any) {
+        return this.http.get(environment.inventoryServiceUrl + 'product/search?searchParam=' + searchParam)
+    }
 }

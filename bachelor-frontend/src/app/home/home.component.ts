@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryService } from '../service/inventory.service';
 
@@ -10,9 +11,10 @@ import { InventoryService } from '../service/inventory.service';
 export class HomeComponent implements OnInit {
   items: any
   showLoadingIcon = true
+  searchParam = ""
 
-  constructor(config: NgbCarouselConfig, private inventoryService: InventoryService) {
-    // customize default values of carousels used by this component tree
+  constructor(config: NgbCarouselConfig, private inventoryService: InventoryService, private router: Router) {
+
     config.interval = 5000;
     config.keyboard = true;
     config.pauseOnHover = true;
@@ -34,6 +36,11 @@ export class HomeComponent implements OnInit {
         this.showLoadingIcon = false
       }
     )
+  }
+
+  search(){
+    localStorage.setItem('searchParam', this.searchParam)
+    this.router.navigate(['category', 'all'])
   }
 
 }

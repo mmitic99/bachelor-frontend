@@ -13,6 +13,8 @@ export class ProductsByCategoryComponent implements OnInit {
   categoryName: any
   items: any
   showLoadingIcon = true
+  searchParam: any
+  showSearch = false
 
   constructor(private route: ActivatedRoute, private inventoryService: InventoryService) { }
 
@@ -22,8 +24,15 @@ export class ProductsByCategoryComponent implements OnInit {
         this.showLoadingIcon = true
         this.items = []
         this.categoryName = data.get("name")
+        this.searchParam = localStorage.getItem('searchParam')
         if (this.categoryName == 'all') {
-          this.getAllProducts()
+          if (this.searchParam != null) {
+            this.showSearch = true
+            this.search()
+          }
+          else {
+            this.getAllProducts()
+          }
         }
         else {
           this.getProducts();
@@ -31,6 +40,23 @@ export class ProductsByCategoryComponent implements OnInit {
       }
     )
   }
+
+  search() {
+    localStorage.removeItem('searchParam')
+    this.inventoryService.search(this.searchParam).subscribe(
+      (data: any) => {
+        this.items = []
+        data.forEach((product: { images: any, quantity: any }) => {
+          this.items.push({ image: product.images[Object.keys(product.images)[0]], product: product, description: this.getProductDescription(product) })
+        });
+        this.showLoadingIcon = false
+      },
+      (error) => {
+        this.items = []
+        this.showLoadingIcon = false
+      })
+  }
+
   getAllProducts() {
     this.inventoryService.getAllProducts().subscribe(
       (data: any) => {
@@ -126,58 +152,63 @@ export class ProductsByCategoryComponent implements OnInit {
     for (const item of this.screenDiagonals) {
       if (item.completed) {
         parameters += 'screenDiagonals=' + item.name + '&'
-        count +=1
+        count += 1
       }
     }
-    if(count == 0){
+    if (count == 0) {
       parameters += 'screenDiagonals=&'
     }
-    
+
     count = 0
     for (const item of this.screenResolutions) {
       if (item.completed) {
         parameters += 'screenResolutions=' + item.name + '&'
-        count +=1
+        count += 1
       }
     }
-    if(count == 0){
+    if (count == 0) {
       parameters += 'screenResolutions=&'
     }
-    
+
     count = 0
     for (const item of this.processorProducer) {
       if (item.completed) {
         parameters += 'processorProducer=' + item.name + '&'
-        count +=1
+        count += 1
       }
     }
-    if(count == 0){
+    if (count == 0) {
       parameters += 'processorProducer=&'
     }
-    
+
     count = 0
     for (const item of this.ram) {
       if (item.completed) {
         parameters += 'ram=' + item.name + '&'
-        count +=1
+        count += 1
       }
     }
-    if(count == 0){
+    if (count == 0) {
       parameters += 'ram=&'
     }
-    
+
     count = 0
     for (const item of this.hdd) {
       if (item.completed) {
         parameters += 'hdd=' + item.name + '&'
-        count +=1
+        count += 1
       }
     }
-    if(count == 0){
+    if (count == 0) {
       parameters += 'hdd=&'
     }
-    
+
     parameters += 'category=' + this.categoryName
+    if (this.searchParam != null)
+      parameters += '&searchParam=' + this.searchParam
+    else
+      parameters += '&searchParam='
+
 
     if (parameters == null || parameters == '') {
       if (this.categoryName == 'all') {
