@@ -48,4 +48,8 @@ export class InventoryService {
     updateQuantity(id: any, quantity: any) {
         return this.http.put<any>(environment.inventoryServiceUrl + 'product/quantity', {id:id, quantity:quantity});
     }
+    
+    filter(parameters: string) {
+        return this.http.get(environment.inventoryServiceUrl + 'product/filter?' + parameters)
+    }
 }
